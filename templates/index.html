@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一覧 - SF6 ファイターカルテ</title>
+    {# 静的ファイルのURLはハードコーディングせずurl_forで取得する #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap">
+            <a class="logo" href="{{ url_for('index') }}">SF6 ファイターカルテ</a>
+            <a class="btn-primary" href="{{ url_for('create') }}">＋ 新規登録</a>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <h1>注目プレイヤー一覧</h1>
+
+        {% if cards %}
+        <div class="card-grid">
+            {# cardsは (Fighter, 診断コメント) のリスト #}
+            {% for f, summary in cards %}
+            <a class="card" href="{{ url_for('detail', fighter_id=f.id) }}">
+                <div class="card-head">
+                    <span class="name">{{ f.name }}</span>
+                    {% if f.rank_name %}
+                    <span class="rank">{{ f.rank_name }}</span>
+                    {% endif %}
+                </div>
+                <div class="meta">
+                    <span>{{ f.main_char }}</span>
+                    {% if f.lp is not none %}
+                    <span class="lp">{{ f.lp }} LP</span>
+                    {% endif %}
+                </div>
+                <p class="summary">{{ summary }}</p>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty">
+            まだ登録がありません。
+            <a href="{{ url_for('create') }}">新規登録</a>してください。
+        </p>
+        {% endif %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">数値はBuckler's Boot Campを見ながら手入力 / 診断はルールベース</div>
+    </footer>
+</body>
+</html>
