@@ -19,7 +19,7 @@
 | `validator.py` | `FighterValidator` クラス。入力値チェック |
 | `diagnosis.py` | `Diagnosis` クラス。ルールベースの診断 |
 | `init_db.py` | DB 構築用スクリプト（最初に1回だけ実行する） |
-| `schema.sql` | テーブル定義（提出物②） |
+| `schema.sql` | テーブル定義 |
 | `seed.sql` | デモデータ 20件 |
 | `templates/` | 画面（Jinja2） |
 | `static/css/style.css` | CSS（手書き。フレームワーク不使用） |
@@ -27,8 +27,6 @@
 ## 起動手順
 
 ```
-cd kadai5
-
 # Flask が未インストールなら
 py -m pip install flask
 
